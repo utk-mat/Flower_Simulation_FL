@@ -18,55 +18,30 @@
 
 ## 🏛️ Architecture
 
-📋 Configuration Layer
-    ⚙️ base.yaml ──┐
-    🎯 toy.yaml ───┤──▶ 🎛️ Hydra Config Manager
-                   │
-🎮 Orchestration Layer
-                   │
-    🎛️ Hydra ──────┴──▶ 📄 main.py
-                        ├──▶ 🎯 Strategy Selection
-                        ├──▶ 👥 Client Generation  
-                        └──▶ 📊 Dataset Preparation
-                             │
-🌸 Federated Learning Core
-                             │
-    🎯 Strategy ─────────────▶ 🖥️ Flower Server
-                               │
-    👥 Clients ──────────────┬─┤
-        ├─▶ 👤 Client 1 ─────┤ │
-        ├─▶ 👤 Client 2 ─────┤ │
-        └─▶ 👤 Client N... ──┤ │
-                              │ │
-    🧠 Local Training ◀───────┘ │
-        ├─▶ 🔄 Train Model      │
-        ├─▶ 📈 Validate         │
-        └─▶ 📤 Send Parameters  │
-                                │
-    🔄 Aggregation ◀────────────┘
-        └─▶ 📊 Update Global Model
+📋 Step 1: Configuration
 
-📊 Data Flow
-    📁 MNIST Dataset
-        └─▶ ✂️ Data Partitioning
-            ├─▶ 👤 Client 1 Data
-            ├─▶ 👤 Client 2 Data
-            └─▶ 👤 Client N Data
+⚙️ base.yaml + toy.yaml → 🎛️ Hydra loads configs
 
-🧠 Model Architecture
-    🔹 CNN (model.py)
-        ├─▶ Conv2D (1→6, 5×5)
-        ├─▶ MaxPool2D (2×2)
-        ├─▶ Conv2D (6→16, 5×5)  
-        ├─▶ MaxPool2D (2×2)
-        ├─▶ Linear (256→120)
-        ├─▶ Linear (120→84)
-        └─▶ Linear (84→10)
+🎮 Step 2: Orchestration
 
-💾 Output
-    📈 Training History ──▶ 📦 results.pkl
-    ⚙️ Config Snapshot ───▶ 📄 config.yaml
+📄 main.py → Coordinates everything
+📊 dataset.py → Splits MNIST data into client chunks
+👥 client.py → Creates federated learning clients
+🖥️ server.py → Sets up aggregation strategy
 
+🌸 Step 3: Federated Training
+
+🎯 Flower server distributes global model to clients
+👤 Each client trains on their local data partition
+🧠 model.py → CNN trains on MNIST digits (0-9)
+📤 Clients send updated parameters back to server
+🔄 Server aggregates all client updates
+📈 Process repeats for multiple rounds
+
+💾 Step 4: Results
+
+📦 Training history saved to results.pkl
+⚙️ Configuration snapshot saved automatically
 ## 📁 Project Structure
 
 ```
