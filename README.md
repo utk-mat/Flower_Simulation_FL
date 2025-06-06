@@ -18,18 +18,18 @@
 
 ## 🏛️ Architecture
 
-📋 Step 1: Configuration
+📋 ---- Step 1: Configuration
 
 ⚙️ base.yaml + toy.yaml → 🎛️ Hydra loads configs
 
-🎮 Step 2: Orchestration
+🎮 ---- Step 2: Orchestration
 
 📄 main.py → Coordinates everything
 📊 dataset.py → Splits MNIST data into client chunks
 👥 client.py → Creates federated learning clients
 🖥️ server.py → Sets up aggregation strategy
 
-🌸 Step 3: Federated Training
+🌸 ---- Step 3: Federated Training
 
 🎯 Flower server distributes global model to clients
 👤 Each client trains on their local data partition
@@ -38,7 +38,7 @@
 🔄 Server aggregates all client updates
 📈 Process repeats for multiple rounds
 
-💾 Step 4: Results
+💾 ---- Step 4: Results
 
 📦 Training history saved to results.pkl
 ⚙️ Configuration snapshot saved automatically
