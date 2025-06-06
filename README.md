@@ -255,6 +255,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **⭐ Star this repo if you found it helpful! ⭐**
 
-*Built with ❤️ for the federated learning community*
+*Built for the federated learning community*
 
 </div>
