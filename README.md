@@ -18,56 +18,54 @@
 
 ## 🏛️ Architecture
 
-```mermaid
-graph TB
-    subgraph "Configuration Layer"
-        A[base.yaml] --> B[Hydra Config Manager]
-        C[toy.yaml] --> B
-    end
-    
-    subgraph "Orchestration Layer"
-        B --> D[main.py]
-        D --> E[Strategy Selection]
-        D --> F[Client Generation]
-        D --> G[Dataset Preparation]
-    end
-    
-    subgraph "Federated Learning Core"
-        E --> H[Flower Server]
-        F --> I[Client 1]
-        F --> J[Client 2]
-        F --> K[Client N...]
-        
-        I --> L[Local Model Training]
-        J --> L
-        K --> L
-        
-        L --> M[Parameter Aggregation]
-        M --> H
-    end
-    
-    subgraph "Data & Models"
-        G --> N[MNIST Dataset]
-        N --> O[Data Partitioning]
-        O --> I
-        O --> J  
-        O --> K
-        
-        P[CNN Model] --> I
-        P --> J
-        P --> K
-    end
-    
-    subgraph "Output"
-        H --> Q[Training History]
-        Q --> R[results.pkl]
-    end
-    
-    style D fill:#e1f5fe
-    style H fill:#f3e5f5
-    style L fill:#fff3e0
-    style R fill:#e8f5e8
-```
+📋 Configuration Layer
+    ⚙️ base.yaml ──┐
+    🎯 toy.yaml ───┤──▶ 🎛️ Hydra Config Manager
+                   │
+🎮 Orchestration Layer
+                   │
+    🎛️ Hydra ──────┴──▶ 📄 main.py
+                        ├──▶ 🎯 Strategy Selection
+                        ├──▶ 👥 Client Generation  
+                        └──▶ 📊 Dataset Preparation
+                             │
+🌸 Federated Learning Core
+                             │
+    🎯 Strategy ─────────────▶ 🖥️ Flower Server
+                               │
+    👥 Clients ──────────────┬─┤
+        ├─▶ 👤 Client 1 ─────┤ │
+        ├─▶ 👤 Client 2 ─────┤ │
+        └─▶ 👤 Client N... ──┤ │
+                              │ │
+    🧠 Local Training ◀───────┘ │
+        ├─▶ 🔄 Train Model      │
+        ├─▶ 📈 Validate         │
+        └─▶ 📤 Send Parameters  │
+                                │
+    🔄 Aggregation ◀────────────┘
+        └─▶ 📊 Update Global Model
+
+📊 Data Flow
+    📁 MNIST Dataset
+        └─▶ ✂️ Data Partitioning
+            ├─▶ 👤 Client 1 Data
+            ├─▶ 👤 Client 2 Data
+            └─▶ 👤 Client N Data
+
+🧠 Model Architecture
+    🔹 CNN (model.py)
+        ├─▶ Conv2D (1→6, 5×5)
+        ├─▶ MaxPool2D (2×2)
+        ├─▶ Conv2D (6→16, 5×5)  
+        ├─▶ MaxPool2D (2×2)
+        ├─▶ Linear (256→120)
+        ├─▶ Linear (120→84)
+        └─▶ Linear (84→10)
+
+💾 Output
+    📈 Training History ──▶ 📦 results.pkl
+    ⚙️ Config Snapshot ───▶ 📄 config.yaml
 
 ## 📁 Project Structure
 
